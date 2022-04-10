@@ -68,9 +68,8 @@ public class RpcTest {
             }
         }).start();
         Supplier<Thread> getClient = () -> new Thread(()-> {
-            RpcClient client = null;
             try {
-                client = new RpcClient(new RpcClientParams()
+                RpcClient client = new RpcClient(new RpcClientParams()
                         .channel(clientChannel).exchange("").routingKey(queue).timeout(1000));
                 RpcClient.Response response = client.doCall(null, "hello".getBytes());
                 assertEquals("*** hello ***", new String(response.getBody()));
